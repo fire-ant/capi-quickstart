@@ -27,7 +27,7 @@ the following providers have been tested:
 - vcluster (CAPVC)
 - microvm (CAPMVM)
 
-### Vcluster
+### Instructions
 
 Once your cluster is ready and the kube-context is set, make sure Tilt is installed and then run:
 ```
