@@ -14,7 +14,7 @@ Switch to the [docker](docker) directory and start a local kind cluster with:
 
 `ctlptl apply -f capi-mgmt.yaml`
 
-use the included [Tiltfile](Tiltfile) and run `Tilt up` or `Tilt ci` to load the capi components into the control plane.
+use the included [Tiltfile](docker/Tiltfile) and run `Tilt up` or `Tilt ci` to load the capi components into the control plane.
 
 create the leaf workload cluster with `kubectl apply -f docker-quickstart.yaml` . If you are running a Docker/Podman UI you should be able to observe the cluster get created as containers.
 
