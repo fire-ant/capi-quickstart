@@ -33,5 +33,8 @@ providers = {
 
 # helm install for oci targets
 for k in providers:
-    cmd="helm install {} --version {} --namespace {}-system --set providerArgs.clusterTopology=true --create-namespace oci://ghcr.io/fire-ant/{}".format(k,providers[k],k,k)
+    cmd="helm install {} --version {} --namespace {}-system --set providerArgs.clusterTopology=true --set providerArgs.clusterResourceSet=true --create-namespace oci://ghcr.io/fire-ant/{}".format(k,providers[k],k,k)
     local_resource(k, cmd=cmd)
+
+
+k8s_yaml('manifests/coredns.yaml')
