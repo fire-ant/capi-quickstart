@@ -1,8 +1,14 @@
 <<<<<<< HEAD
 .vagrant/
 k3s/
+<<<<<<< HEAD
 ||||||| parent of 13bbe5b (bumping along)
 =======
 k3s/
 .vagrant/
 >>>>>>> 13bbe5b (bumping along)
+||||||| parent of ca9996c (many ideas)
+.vagrant/
+=======
+.vagrant/
+>>>>>>> ca9996c (many ideas)
