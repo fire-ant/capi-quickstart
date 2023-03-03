@@ -21,3 +21,7 @@ create the leaf workload cluster with `kubectl apply -f docker-quickstart.yaml` 
 Once you have finished you can delete the workload cluster with `kubectl delete -f docker-quickstart.yaml`.
 
 remove the mgmt cluster with `ctlptl apply -f capi-mgmt.yaml`.
+
+### Vcluster
+
+Follow the same steps as above, replacing 'docker' with vcluster.
