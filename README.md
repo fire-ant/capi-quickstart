@@ -26,10 +26,6 @@ remove the mgmt cluster with `ctlptl apply -f capi-mgmt.yaml`.
 
 Follow the same steps as above, replacing 'docker' with vcluster.
 
-### operator
-
-For production environments it is more likely that you woll require ongoing management and maintenance of the various Cluster API components and providers. We can take a similar path to the helm based approach above but replace individual components managed via helm with the [Cluster-API operator](https://github.com/kubernetes-sigs/cluster-api-operator).
-
-The operator directory holds a similar example to the docker example but retrieves the CAPI components through the adjoining kustomization directory.
-
-Please see the Cluster-API operator [docs](https://github.com/kubernetes-sigs/cluster-api-operator/blob/main/docs/getting-started.md) to understand the specifics.
+KUBECONFIG=k3s/k3s.yaml tilt ci
+KUBECONFIG=k3s/k3s.yaml kubectl apply -f manifests/mvm-cluster.yaml
+KUBECONFIG=k3s/k3s.yaml kubectl get secret lm-1-kubeconfig -o json -n capmvm-system | jq -r .data.value | base64 -d > k3s/config.yaml
