@@ -24,8 +24,6 @@ remove the mgmt cluster with `ctlptl apply -f capi-mgmt.yaml`.
 
 ### operator
 
-BLOCKED! - it seems there may be a small issue wit the early release of the operator where it isnt deploying the Bootstrapand controlplane.
-
 For production environments it is more likely that you woll require ongoing management and maintenance of the various Cluster API components and providers. We can take a similar path to the helm based approach above but replace individual components managed via helm with the [Cluster-API operator](https://github.com/kubernetes-sigs/cluster-api-operator).
 
 The operator directory holds a similar example to the docker example but retrieves the CAPI components through the adjoining kustomization directory.
