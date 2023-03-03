@@ -10,7 +10,7 @@ to get the necessary tools for the quickstart you can use the accompanying [Brew
 
 The tools include the Tilt ctlptl cli which can be used to create a local kind cluster with the docker socket mounted to the mgmt control plane node.
 
-From the switch to the [docker](docker) directory start the cluster with:
+Switch to the [docker](docker) directory and start a local kind cluster with:
 
 `ctlptl apply -f capi-mgmt.yaml`
 
