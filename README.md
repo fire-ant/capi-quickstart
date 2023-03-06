@@ -33,5 +33,3 @@ For production environments it is more likely that you woll require ongoing mana
 The operator directory holds a similar example to the docker example but retrieves the CAPI components through the adjoining kustomization directory.
 
 Please see the Cluster-API operator [docs](https://github.com/kubernetes-sigs/cluster-api-operator/blob/main/docs/getting-started.md) to understand the specifics.
-
-
