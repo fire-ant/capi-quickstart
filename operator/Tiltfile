@@ -16,7 +16,7 @@ deploy_cert_manager(
 
 # capi-operator version
 components = {
-    'capi-operator': '0.1.0',
+    'capi-operator': 'v0.1.0',
 }
 
 # helm install for oci targets
@@ -27,6 +27,7 @@ for k in components:
 namespace_create('capi-system')
 namespace_create('capi-kubeadm-bootstrap-system')
 namespace_create('capi-kubeadm-control-plane-system')
+namespace_create('capd-system')
 
 # crds for cluster api components
 k8s_yaml("operator-crds.yaml")
