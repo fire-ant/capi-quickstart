@@ -22,6 +22,10 @@ Once you have finished you can delete the workload cluster with `kubectl delete 
 
 remove the mgmt cluster with `ctlptl apply -f capi-mgmt.yaml`.
 
+### Vcluster
+
+Follow the same steps as above, replacing 'docker' with vcluster.
+
 ### operator
 
 For production environments it is more likely that you woll require ongoing management and maintenance of the various Cluster API components and providers. We can take a similar path to the helm based approach above but replace individual components managed via helm with the [Cluster-API operator](https://github.com/kubernetes-sigs/cluster-api-operator).
