@@ -58,9 +58,11 @@ Vagrant.configure("2") do |config|
     sh.inline = <<~SHELL
       #!/usr/bin/env bash
       set -eux -o pipefail
-      apt-get install -y qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils
+      sudo apt-get -y install qemu qemu-kvm libvirt-clients libvirt-daemon-system virtinst bridge-utils
       adduser 'vagrant' libvirt
       adduser 'vagrant' kvm
+      systemctl enable libvirtd
+      systemctl start libvirtd
     SHELL
   end
 
@@ -73,33 +75,39 @@ Vagrant.configure("2") do |config|
     ./provision.sh containerd --dev
     SHELL
   end
-  config.vm.provision "configure networking", type: "shell", run: "once" do |sh|
-    sh.inline = <<~SHELL
-    #!/usr/bin/env bash
-    cat << EOF >>~/liquid-metal-net.xml
-<network>
-  <name>liquid-metal</name>
-  <forward mode='nat'>
-    <nat>
-      <port start='1024' end='65535'/>
-    </nat>
-  </forward>
-  <bridge name="$BRIDGE_NAME" stp='on' delay='0'/>
-  <ip address='192.168.100.1' netmask='255.255.255.0'>
-    <dhcp>
-      <range start='192.168.100.10' end='192.168.100.254'/>
-    </dhcp>
-  </ip>
-</network>
+
+$DOC = <<-'SCRIPT'
+  rm -rf ${NETNAME}-net.xml
+  cat >> ${NETNAME}-net.xml <<EOF
+  <network>
+    <name>${NETNAME}</name>
+    <forward mode='nat'>
+      <nat>
+        <port start='1024' end='65535'/>
+      </nat>
+    </forward>
+    <bridge name='${BRIDGE}' stp='on' delay='0'/>
+    <ip address='192.168.100.1' netmask='255.255.255.0'>
+      <dhcp>
+        <range start='192.168.100.10' end='192.168.100.254'/>
+      </dhcp>
+    </ip>
+  </network>
 EOF
-    virsh net-define liquid-metal-net.xml
-    virsh net-start liquid-metal
-    TAP_NAME=tap0
-    ip tuntap add $TAP_NAME mode tap
-    ip link set $TAP_NAME  master $BRIDGE_NAME up
-    ip link show $TAP_NAME
-    ip link show $BRIDGE_NAME
-    SHELL
+  virsh net-define ${NETNAME}-net.xml
+  virsh net-start ${NETNAME}
+  virsh net-autostart ${NETNAME}
+  ip tuntap add $TAPNAME mode tap
+  ip link set $TAPNAME master $BRIDGE up
+  SCRIPT
+  
+  Vagrant.configure("2") do |config|
+    config.vm.provision "shell", inline: $script
+  end
+  
+  config.vm.provision "configure networking", type: "shell", run: "once", privileged: "true" do |sh|
+    sh.env = { BRIDGE: "flbr0", TAPNAME: "tap0", NETNAME: "flintlock" }
+    sh.inline = $DOC
   end
 
   config.vm.provision "install-flintlock", type: "shell", run: "once" do |sh|
