@@ -17,7 +17,7 @@ Vagrant up
 export KUBECONFIG=kc/k3s.yaml
 ```
 
-use the included [Tiltfile](docker/Tiltfile) and run `Tilt up` or `Tilt ci` to load the capi components into the control plane.
+otherwise you will need to preconfigure another instance or your host to run microvms. see [this tutorial](https://weaveworks-liquidmetal.github.io/site/docs/category/basics-do-try-this-at-home/) for the setup.
 
 ### Providers
 
