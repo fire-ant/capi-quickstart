@@ -1,22 +1,2 @@
-<<<<<<< HEAD
 .vagrant/*
 kc/*
-||||||| parent of 1131f35 (updated)
-<<<<<<< HEAD
-.vagrant/
-k3s/
-<<<<<<< HEAD
-||||||| parent of 13bbe5b (bumping along)
-=======
-k3s/
-.vagrant/
->>>>>>> 13bbe5b (bumping along)
-||||||| parent of ca9996c (many ideas)
-.vagrant/
-=======
-.vagrant/
->>>>>>> ca9996c (many ideas)
-=======
-.vagrant/*
-kc/*
->>>>>>> 1131f35 (updated)
