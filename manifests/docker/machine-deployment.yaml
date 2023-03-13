@@ -1,0 +1,27 @@
+---
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: MachineDeployment
+metadata:
+  name: worker-md-0
+  namespace: default
+spec:
+  clusterName: capd-workload
+  replicas: 1
+  selector:
+    matchLabels:
+      cluster.x-k8s.io/cluster-name: capd-workload
+  template:
+    spec:
+      version: v1.26.0
+      clusterName: capd-workload
+      bootstrap:
+        configRef:
+          apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
+          kind: KubeadmConfigTemplate
+          name: worker
+          namespace: default
+      infrastructureRef:
+        apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+        kind: DockerMachineTemplate
+        name: worker
+        namespace: default

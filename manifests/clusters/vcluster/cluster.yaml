@@ -1,0 +1,24 @@
+---
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: Cluster
+metadata:
+  name: capvc-workload
+  namespace: capvc-system
+spec:
+  infrastructureRef:
+    apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
+    kind: VCluster
+    name: capvc-workload
+  controlPlaneRef:
+    apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
+    kind: VCluster
+    name: capvc-workload
+---
+apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
+kind: VCluster
+metadata:
+  name: capvc-workload
+  namespace: capvc-system
+spec:
+
+  kubernetesVersion: "1.25"
